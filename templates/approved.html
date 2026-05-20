@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Approved</title>
+</head>
+<body>
+
+<h1>Request Approved</h1>
+
+<hr>
+
+<p>
+Request:
+{{ request_data.request_name }}
+</p>
+
+<p>
+Approved: {{ request_data.approved }}
+</p>
+
+{% if request_data.ticket_id == 'REQ-8F2A91' %}
+
+<h2>
+FLAG{vertical_privilege_escalation_success}
+</h2>
+
+{% endif %}
+
+<br>
+
+<a href="/challenge5">Back</a>
+
+</body>
+</html>
