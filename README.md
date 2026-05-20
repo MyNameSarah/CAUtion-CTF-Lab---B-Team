@@ -16,7 +16,7 @@ Flask + Docker 기반 IDOR 워게임 환경.
 
 ## Run with Docker
 
-docker build -t idor-lab .
+docker build -t idor-lab .  
 docker run -p 80:80 idor-lab
 
 ---
