@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Updated Profile</title>
+</head>
+<body>
+
+<h1>Profile Updated</h1>
+
+<hr>
+
+<p>User ID: {{ user.id }}</p>
+
+<p>Username: {{ user.username }}</p>
+
+<p>Email: {{ user.email }}</p>
+
+<p>Role: {{ user.role }}</p>
+
+{% if user.role == 'admin' %}
+
+<h2>
+FLAG{body_parameter_idor_success}
+</h2>
+
+{% endif %}
+
+<br>
+
+<a href="/challenge3">Back</a>
+
+</body>
+</html>
