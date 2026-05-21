@@ -4,6 +4,9 @@
 
 ## 실행
 
+아래 명령은 `compose.yaml`이 있는 폴더에서 실행한다.
+Docker Desktop이 켜져 있어야 한다.
+
 ```bash
 docker compose up --build
 ```
