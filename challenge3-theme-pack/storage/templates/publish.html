@@ -1,0 +1,31 @@
+<section class="storage-view">
+    <div class="status-card">
+        {% if published %}
+            <span class="status-pill live">Published</span>
+        {% else %}
+            <span class="status-pill wait">Pending</span>
+        {% endif %}
+        <h2>{{ message }}</h2>
+        {% if review_note %}
+            <p class="muted">{{ review_note }}</p>
+            <!-- TODO: release token review still depends on internal approval.json metadata. -->
+        {% endif %}
+    </div>
+
+    {% if published %}
+        <article class="theme-card">
+            <span class="status-pill">Release summary</span>
+            <h3>{{ manifest.get("name", "Untitled theme") }}</h3>
+            <p class="muted">{{ manifest.get("description", "") }}</p>
+            <p class="muted">Version {{ manifest.get("version", "unknown") }} is now available on the live page.</p>
+        </article>
+    {% endif %}
+
+    {% if flag %}
+        <article class="token-card">
+            <span class="status-pill live">Release token</span>
+            <h3>Release Token</h3>
+            <pre>{{ flag }}</pre>
+        </article>
+    {% endif %}
+</section>

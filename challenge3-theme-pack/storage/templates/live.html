@@ -1,0 +1,54 @@
+<section class="storage-view">
+    {% if theme_css %}
+        <style>{{ theme_css }}</style>
+    {% endif %}
+    {% if not published %}
+        <div class="status-card">
+            <span class="status-pill wait">Not live</span>
+            <h2>{{ message }}</h2>
+            <p class="muted">Publish a processed theme before checking the live page state.</p>
+        </div>
+    {% endif %}
+
+    {% if published %}
+        <article class="theme-card theme-render">
+            <div class="theme-surface">
+                <nav class="theme-nav">
+                    <strong>{{ manifest.get("name", "Untitled theme") }}</strong>
+                    <span>Live</span>
+                </nav>
+                <section class="theme-hero">
+                    <div class="theme-copy">
+                        <p class="theme-kicker">Live profile</p>
+                        <h3>{{ manifest.get("name", "Untitled theme") }}</h3>
+                        <p class="theme-description">{{ manifest.get("description", "") }}</p>
+                        <div class="theme-actions">
+                            <span>Notes</span>
+                            <span>Uploads</span>
+                            <span>Releases</span>
+                        </div>
+                    </div>
+                    <aside class="profile-card">
+                        <div class="profile-banner"></div>
+                        <div class="profile-body">
+                            <strong>Security Study Notes</strong>
+                            <p>File upload research and weekly CTF progress.</p>
+                        </div>
+                    </aside>
+                </section>
+                <section class="theme-grid">
+                    <article><span>01</span><strong>Upload Lab</strong><p>Track findings from file handling tests.</p></article>
+                    <article><span>02</span><strong>Theme Memo</strong><p>Keep design notes close to the profile.</p></article>
+                    <article><span>03</span><strong>Release Log</strong><p>Publish the selected theme version.</p></article>
+                </section>
+                {% if preview_text %}
+                    <article class="theme-note">
+                        <strong>Theme note</strong>
+                        <p>{{ preview_text }}</p>
+                    </article>
+                {% endif %}
+                <p class="theme-version">Theme version {{ manifest.get("version", "unknown") }}</p>
+            </div>
+        </article>
+    {% endif %}
+</section>

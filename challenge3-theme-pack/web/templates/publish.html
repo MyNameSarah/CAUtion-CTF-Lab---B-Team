@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Publish Theme - ThemeDock</title>
+    <style>
+        :root {
+            --ink: #18212f;
+            --muted: #667387;
+            --line: #d6dee8;
+            --soft: #f4f7fb;
+            --accent: #2563eb;
+            --accent-dark: #1d4ed8;
+            --green: #15803d;
+            --amber: #b45309;
+            --danger: #b42318;
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            color: var(--ink);
+            background:
+                linear-gradient(135deg, rgba(219, 234, 254, 0.96), transparent 36%),
+                linear-gradient(315deg, rgba(220, 252, 231, 0.78), transparent 35%),
+                #f8fafc;
+        }
+        a { color: var(--accent-dark); text-decoration: none; font-weight: 850; }
+        .shell { width: min(1040px, calc(100% - 40px)); margin: 0 auto; padding: 30px 0 48px; }
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            margin-bottom: 24px;
+        }
+        .brand { display: flex; align-items: center; gap: 12px; font-weight: 850; color: var(--ink); text-decoration: none; }
+        .mark {
+            width: 38px;
+            height: 38px;
+            border-radius: 8px;
+            display: grid;
+            place-items: center;
+            color: #ffffff;
+            background: linear-gradient(135deg, #2563eb, #15803d);
+        }
+        .nav { display: flex; gap: 10px; flex-wrap: wrap; }
+        .button, .step {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 40px;
+            border-radius: 8px;
+            padding: 9px 13px;
+            border: 1px solid var(--line);
+            background: #ffffff;
+            color: var(--ink);
+            text-decoration: none;
+            font-weight: 850;
+        }
+        .step.active, .button.primary { border-color: var(--accent); background: var(--accent); color: #ffffff; }
+        main {
+            border: 1px solid rgba(214, 222, 232, 0.95);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.92);
+            box-shadow: 0 24px 70px rgba(24, 33, 47, 0.08);
+            overflow: hidden;
+        }
+        .topbar {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 18px;
+            padding: 28px 30px;
+            border-bottom: 1px solid var(--line);
+            background: linear-gradient(90deg, #ffffff, #f6f9fd);
+        }
+        .eyebrow { color: var(--accent-dark); font-size: 0.78rem; font-weight: 850; text-transform: uppercase; letter-spacing: 0.08em; }
+        h1 { margin: 8px 0 8px; font-size: clamp(2rem, 4vw, 3.8rem); line-height: 1; letter-spacing: 0; }
+        code {
+            display: inline-block;
+            max-width: 100%;
+            overflow-wrap: anywhere;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: var(--soft);
+            color: var(--ink);
+            padding: 6px 8px;
+            font-size: 0.9rem;
+        }
+        .workspace { padding: 30px; }
+        .error {
+            border: 1px solid #f3b7ae;
+            border-radius: 8px;
+            background: #fff4f2;
+            color: var(--danger);
+            padding: 12px 14px;
+            font-weight: 750;
+        }
+        .storage-view { display: grid; gap: 18px; }
+        .status-card, .theme-card, .token-card {
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: #ffffff;
+            padding: 20px;
+        }
+        .status-card { background: var(--soft); }
+        .token-card { border-color: #bfdbfe; background: #eff6ff; }
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            min-height: 28px;
+            border-radius: 999px;
+            padding: 4px 10px;
+            background: #dbeafe;
+            color: var(--accent-dark);
+            font-size: 0.78rem;
+            font-weight: 850;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+        .status-pill.live { background: #dcfce7; color: var(--green); }
+        .status-pill.wait { background: #fef3c7; color: var(--amber); }
+        .status-pill.error { background: #fee2e2; color: var(--danger); }
+        .theme-card h2, .theme-card h3, .status-card h2, .token-card h3 { margin: 10px 0 8px; letter-spacing: 0; }
+        .muted { color: var(--muted); }
+        pre {
+            margin: 14px 0 0;
+            max-height: 330px;
+            overflow: auto;
+            white-space: pre-wrap;
+            word-break: break-word;
+            border: 1px solid #1f2937;
+            border-radius: 8px;
+            background: #111827;
+            color: #e5edf5;
+            padding: 16px;
+            font-size: 0.92rem;
+            line-height: 1.5;
+        }
+        .token-card pre { border-color: #bfdbfe; background: #ffffff; color: #17212f; }
+        @media (max-width: 760px) {
+            .shell { width: min(100% - 28px, 720px); padding-top: 20px; }
+            header, .topbar { align-items: flex-start; flex-direction: column; }
+            .workspace, .topbar { padding: 24px; }
+        }
+    </style>
+</head>
+<body>
+<div class="shell">
+    <header>
+        <a class="brand" href="/">
+            <div class="mark">TD</div>
+            <span>ThemeDock</span>
+        </a>
+        <nav class="nav" aria-label="theme navigation">
+            <a class="step" href="/theme/{{ theme_id }}">Preview</a>
+            <a class="step active" href="/theme/{{ theme_id }}/publish">Publish</a>
+            <a class="step" href="/theme/{{ theme_id }}/live">Live</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="topbar">
+            <div>
+                <div class="eyebrow">Release desk</div>
+                <h1>Publish theme.</h1>
+                {% if theme_id %}
+                    <code>{{ theme_id }}</code>
+                {% endif %}
+            </div>
+            <a class="button" href="/">Import another</a>
+        </section>
+
+        <section class="workspace">
+            {% if error %}
+                <p class="error">{{ error }}</p>
+            {% else %}
+                {{ storage_html|safe }}
+            {% endif %}
+            {% if theme_id %}
+                <p class="nav">
+                    <a class="button primary" href="/theme/{{ theme_id }}/live">View live theme</a>
+                    <a class="button" href="/theme/{{ theme_id }}">Back to preview</a>
+                </p>
+            {% endif %}
+        </section>
+    </main>
+</div>
+</body>
+</html>
