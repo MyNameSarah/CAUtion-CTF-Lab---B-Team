@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>👥 프로필 목록</h2>
+        <a href="/create" class="btn btn-primary">새 프로필 등록</a>
+    </div>
+    
+    <div class="row">
+        {% if not profiles %}
+            <div class="col-12 text-center mt-5">
+                <p class="text-muted">아직 등록된 프로필이 없습니다.</p>
+            </div>
+        {% else %}
+            {% for p in profiles %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm" style="background-color: {{ p.color }};">
+                    <div class="card-body text-center">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed={{ p.name }}" class="rounded-circle mb-2" width="60">
+                        <h5>{{ p.name }}</h5>
+                        <p class="small text-muted text-truncate">{{ p.bio }}</p>
+                        <a href="/view/{{ p.id }}" class="btn btn-sm btn-outline-dark mt-2">상세 보기</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
