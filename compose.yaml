@@ -1,47 +1,25 @@
 name: file-upload
 
 services:
-  ch1:
-    build: ./challenge1-php-upload
+  web:
+    build: ./web
     ports:
-      - "127.0.0.1:${CH1_PORT:-10001}:80"
-    volumes:
-      - ./.secrets/ch1:/flag.txt:ro
+      - "127.0.0.1:${APP_PORT:-10003}:80"
     networks:
-      - ch1_net
-    restart: unless-stopped
-
-  ch2:
-    build: ./challenge2-profile-banner
-    ports:
-      - "127.0.0.1:${CH2_PORT:-10002}:80"
-    volumes:
-      - ./.secrets/ch2:/flag.txt:ro
-    networks:
-      - ch2_net
-    restart: unless-stopped
-
-  ch3-web:
-    build: ./challenge3-theme-pack/web
-    ports:
-      - "127.0.0.1:${CH3_PORT:-10003}:80"
-    networks:
-      - ch3_net
+      - app_net
     environment:
-      - STORAGE_URL=http://ch3-storage:80
+      - STORAGE_URL=http://storage:80
     depends_on:
-      - ch3-storage
+      - storage
     restart: unless-stopped
 
-  ch3-storage:
-    build: ./challenge3-theme-pack/storage
+  storage:
+    build: ./storage
     volumes:
-      - ./.secrets/ch3-storage:/flag.txt:ro
+      - ./.secrets/storage:/flag.txt:ro
     networks:
-      - ch3_net
+      - app_net
     restart: unless-stopped
 
 networks:
-  ch1_net:
-  ch2_net:
-  ch3_net:
+  app_net:

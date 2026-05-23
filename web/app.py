@@ -11,7 +11,7 @@ from werkzeug.utils import secure_filename
 app = Flask(__name__)
 app.config["MAX_CONTENT_LENGTH"] = 2 * 1024 * 1024
 
-STORAGE_URL = os.environ.get("STORAGE_URL", "http://ch3-storage:80").rstrip("/")
+STORAGE_URL = os.environ.get("STORAGE_URL", "http://storage:80").rstrip("/")
 
 
 def is_uuid(value: str) -> bool:
