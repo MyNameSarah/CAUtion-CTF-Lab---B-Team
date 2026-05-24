@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CTF Challenge</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Internal Share System</h1>
+
+    <p class="description">
+        Employees use the internal share system
+        to exchange private notes.
+    </p>
+
+    <p class="description">
+        Shared objects are referenced using
+        encoded identifiers.
+    </p>
+
+    <hr>
+
+    <h2>Example Shared Link</h2>
+
+    <div class="code">
+        /share/Z3Vlc3Rfbm90ZQ==
+    </div>
+
+    <h2>Available API</h2>
+
+    <div class="code">
+        /api/share/check?key=VALUE
+    </div>
+
+    <p class="hint">
+        The API may help determine whether
+        a shared object exists.
+    </p>
+
+    <hr>
+
+    <h2>Objective</h2>
+
+    <p>
+        Discover hidden internal shared objects.
+    </p>
+
+    <p class="hint">
+        Shared object names often follow predictable naming conventions.
+    </p>
+    
+    <br>
+
+    <a href="/logout">
+        Logout
+    </a>
+
+</div>
+
+</body>
+</html>

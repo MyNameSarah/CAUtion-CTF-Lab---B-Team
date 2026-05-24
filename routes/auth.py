@@ -33,7 +33,7 @@ def login():
             session["user_id"] = user["id"]
             session["role"] = user["role"]
 
-            return redirect("/home")
+            return redirect("/challenge")
 
         return "Login Failed"
 
