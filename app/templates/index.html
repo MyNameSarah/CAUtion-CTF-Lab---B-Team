@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DNS Lookup</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Courier New', monospace;
+      background: #0d1117;
+      color: #c9d1d9;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .container { width: 100%; max-width: 600px; }
+    .logo {
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: #f0883e;
+      margin-bottom: 0.3rem;
+    }
+    .badge-orange {
+      display: inline-block;
+      background: #2a1500;
+      border: 1px solid #6e3200;
+      border-radius: 4px;
+      color: #f0883e;
+      font-size: 0.72rem;
+      padding: 0.18rem 0.5rem;
+      margin-bottom: 0.7rem;
+    }
+    .subtitle {
+      font-size: 0.82rem;
+      color: #8b949e;
+      margin-bottom: 1.8rem;
+    }
+    .card {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 12px;
+      padding: 1.8rem;
+    }
+    .field-label {
+      font-size: 0.78rem;
+      color: #8b949e;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin-bottom: 0.5rem;
+    }
+    .input-row { display: flex; gap: 0.6rem; }
+    input[type="text"] {
+      flex: 1;
+      background: #0d1117;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      color: #c9d1d9;
+      font-family: inherit;
+      font-size: 1rem;
+      padding: 0.65rem 1rem;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    input[type="text"]:focus { border-color: #f0883e; }
+    button {
+      background: #b45309;
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 1rem;
+      padding: 0.65rem 1.4rem;
+      transition: background 0.15s;
+      white-space: nowrap;
+    }
+    button:hover { background: #d97706; }
+    .result-box {
+      background: #0d1117;
+      border: 1px solid #21262d;
+      border-radius: 8px;
+      padding: 1rem 1.2rem;
+      margin-top: 1rem;
+      white-space: pre-wrap;
+      font-size: 0.88rem;
+      color: #3fb950;
+      max-height: 400px;
+      overflow-y: auto;
+      line-height: 1.65;
+    }
+    .error-box {
+      background: #160d1a;
+      border: 1px solid #6e1a1a;
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      margin-top: 1rem;
+      color: #f85149;
+      font-size: 0.9rem;
+    }
+    .hint {
+      border: 1px solid #21262d;
+      border-left: 3px solid #f0883e;
+      border-radius: 6px;
+      padding: 0.9rem 1.2rem;
+      margin-top: 1.2rem;
+      font-size: 0.8rem;
+      color: #8b949e;
+      line-height: 1.9;
+    }
+    .hint strong { color: #f0883e; }
+    code {
+      background: #21262d;
+      border-radius: 3px;
+      padding: 0.1rem 0.35rem;
+      font-size: 0.85em;
+      color: #c9d1d9;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">⚡ CAUtion CTF Lab</div>
+    <span class="badge-orange">DNS Lookup</span>
+    <div class="subtitle">도메인 이름을 IP 주소로 조회합니다.</div>
+
+    <div class="card">
+      <div class="field-label">Hostname / Domain</div>
+      <form method="POST" action="/lookup">
+        <div class="input-row">
+          <input type="text" name="host"
+                 value="{{ host or '' }}"
+                 placeholder="example.com"
+                 autocomplete="off" spellcheck="false">
+          <button type="submit">Lookup</button>
+        </div>
+      </form>
+
+      {% if error %}
+      <div class="error-box">{{ error }}</div>
+      {% endif %}
+
+      {% if result %}
+      <div class="result-box">{{ result }}</div>
+      {% endif %}
+    </div>
+
+  </div>
+</body>
+</html>
