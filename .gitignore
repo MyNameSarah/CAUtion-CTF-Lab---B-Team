@@ -1,15 +1,8 @@
-# Database
 database.db
-
-# Python
 __pycache__/
 *.pyc
-
-# Environment
 .env
-
-# VSCode
 .vscode/
-
-# macOS
 .DS_Store
+.dockerignore
+.gitignore

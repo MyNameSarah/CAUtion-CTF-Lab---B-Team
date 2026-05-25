@@ -51,16 +51,13 @@ def check_share():
     return "", 404
 
 
-# 실제 공유 문서 조회
 @challenge_bp.route("/share/<note_key>")
 def share(note_key):
-
     if "user" not in session:
         return redirect("/login")
 
     conn = get_db()
 
-    # 의도적 IDOR
     note = conn.execute(
         "SELECT * FROM share_notes WHERE note_key=?",
         (note_key,)
@@ -71,7 +68,4 @@ def share(note_key):
     if not note:
         return "Shared note not found"
 
-    return render_template(
-        "shared_note.html",
-        note=note
-    )
+    return render_template("shared_note.html", note=note)

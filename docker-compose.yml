@@ -1,7 +1,7 @@
-version: '3'
+version: "3.8"
 
 services:
-  idor-lab:
+  wargame:
     build: .
     ports:
-      - "80:80"
+      - "8080:80"
