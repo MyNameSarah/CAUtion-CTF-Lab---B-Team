@@ -1,3 +1,4 @@
+import os
 from flask import Flask, request, render_template, render_template_string, abort
 import html
 
@@ -13,12 +14,14 @@ profiles = [
 ]
 
 def check_ssti_payload(input_string):
-    blacklist = [
-        'class', 'mro', 'subclasses', 'config', 'request', 'self',
-        '__', 
-        '.'  
-    ]
+    blacklist_path = '/app/secret_filters.txt'
     
+    if os.path.exists(blacklist_path):
+        with open(blacklist_path, 'r') as f:
+            blacklist = [line.strip().lower() for line in f if line.strip()]
+    else:
+        blacklist = ['class', 'mro', 'config'] 
+
     for bad in blacklist:
         if bad in input_string.lower():
             return True
